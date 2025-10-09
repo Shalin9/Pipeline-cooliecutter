@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [token, setToken] = useState("");
@@ -58,6 +60,14 @@ export default function Dashboard() {
           {copied ? "Copied!" : "Copy Token"}
         </button>
       </div>
+
+      {/* New Payments Portal Button */}
+      <button 
+        onClick={() => navigate("/payments")}
+        style={{ padding: 10, background: "#27ae60", color: "#fff", border: "none", borderRadius: 8, marginTop: 20 }}
+      >
+        Go to Payments Portal
+      </button>
 
       <button onClick={handleLogout} style={{ padding: 10, background: "#e74c3c", color: "#fff", border: "none", borderRadius: 8, marginTop: 20 }}>
         Logout
