@@ -13,3 +13,15 @@ const paymentSchema = new mongoose.Schema({
 });
 
 export default mongoose.model("Payment", paymentSchema);
+/*
+---------------------------------
+Reference List (Harvard Style)
+---------------------------------
+MongoDB (2024) *MongoDB Manual – Data Modeling and Schema Design.* Available at: https://www.mongodb.com/docs/manual/core/data-model-design/
+
+Mongoose (2024) *Mongoose Documentation – Schemas and Models.* Available at: https://mongoosejs.com/docs/guide.html
+
+Mozilla Developer Network (MDN) (2024) *JavaScript Reference – Data Types and Date Objects.* Available at: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+
+Node.js (2024) *Node.js Documentation – Modules and ES6 Import/Export Syntax.* Available at: https://nodejs.org/api/esm.html
+*/
