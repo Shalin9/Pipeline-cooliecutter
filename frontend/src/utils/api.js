@@ -1,17 +1,27 @@
-// src/utils/api.js
 import axios from "axios";
 
-// Axios instance to talk to backend
 const api = axios.create({
-  baseURL: "http://localhost:5001/api", // backend URL
-  withCredentials: true,                // allow JWT in headers/cookies
+  baseURL: "https://localhost:5001/api",
+  withCredentials: true,
+  timeout: 10000,
 });
 
-// Optional: intercept responses to handle errors globally
+api.interceptors.request.use(
+  (config) => {
+    console.log(`➡️ [${config.method?.toUpperCase()}] ${config.url}`);
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    console.error("API Error:", error.response || error.message);
+    if (error.response) {
+      console.error("❌ API Error:", error.response.status, error.response.data);
+    } else {
+      console.error("⚠️ Network or server error:", error.message);
+    }
     return Promise.reject(error);
   }
 );

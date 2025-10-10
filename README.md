@@ -119,4 +119,8 @@ Fork the repository.
 Create a feature branch: git checkout -b feature/my-feature
 Commit your changes: git commit -m "Add my feature"
 Push to your branch: git push origin feature/my-feature
+<<<<<<< HEAD
 Open a Pull Request
+=======
+Open a Pull Request
+>>>>>>> f22b4e1 (update from http to https)

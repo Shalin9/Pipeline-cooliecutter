@@ -5,7 +5,6 @@ import { protect } from "../middleware/auth.js";
 
 const router = express.Router();
 
-// Create a payment
 router.post(
   "/",
   protect,
@@ -22,13 +21,7 @@ router.post(
     if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
 
     try {
-      const payment = new Payment({
-        user: req.user.id,
-        ...req.body,
-        status: "Pending",
-        date: new Date()
-      });
-
+      const payment = new Payment({ user: req.user.id, ...req.body, status: "Pending", date: new Date() });
       await payment.save();
       res.status(201).json({ message: "Payment created successfully", payment });
     } catch (err) {
@@ -38,7 +31,6 @@ router.post(
   }
 );
 
-// Get user payments
 router.get("/", protect, async (req, res) => {
   try {
     const payments = await Payment.find({ user: req.user.id }).sort({ date: -1 });
