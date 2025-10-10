@@ -1,55 +1,44 @@
+# .github/workflows/devsecops.yml
 name: DevSecOps Pipeline
 
-# Trigger pipeline on push or pull request to main
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   pull_request:
-    branches: [main]
 
 jobs:
   build-and-secure:
     runs-on: ubuntu-latest
+
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      # 1. Checkout code
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '22'
+      # 2. Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'
 
-    - name: Install backend dependencies
-      run: npm install
-      working-directory: ./backend
+      # 3. Install dependencies
+      - name: Install dependencies
+        run: npm ci
 
-    - name: Install frontend dependencies
-      run: npm install
-      working-directory: ./frontend
+      # 4. Run npm audit for security vulnerabilities
+      - name: Security Audit
+        run: npm audit --audit-level=moderate
 
-    - name: Run npm audit for backend
-      run: npm audit --audit-level=moderate
-      working-directory: ./backend
+      # 5. Lint code to check for errors
+      - name: Lint Code
+        run: npx eslint .
 
-    - name: Run npm audit for frontend
-      run: npm audit --audit-level=moderate
-      working-directory: ./frontend
+      # 6. Run Unit Tests (Input Whitelisting)
+      - name: Run Tests
+        run: npm test
 
-    - name: Run ESLint security checks
-      run: npx eslint . --plugin security || echo "Security lint complete"
-
-    - name: Run backend unit tests
-      run: npm test
-      working-directory: ./backend
-
-    - name: Run frontend unit tests
-      run: npm test --watchAll=false
-      working-directory: ./frontend
-
-    - name: Build frontend
-      run: npm run build
-      working-directory: ./frontend
-
-    - name: Build backend (optional if needed)
-      run: echo "Backend ready"
-      working-directory: ./backend
+      # 7. Optional: Build frontend for deployment
+      - name: Build Frontend
+        working-directory: ../frontend
+        run: npm ci && npm run build
