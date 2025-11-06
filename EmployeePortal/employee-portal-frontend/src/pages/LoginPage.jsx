@@ -156,3 +156,15 @@ export default function LoginPage() {
     </div>
   );
 }
+
+/*
+References (Harvard Style):
+
+Meta Platforms Inc. (2024) *React Documentation: Components, State, and Lifecycle.* Available at: https://react.dev/
+
+Axios (2024) *Axios - Promise-based HTTP client for the browser and Node.js.* Available at: https://axios-http.com/docs/intro
+
+React Router (2024) *React Router Documentation.* Available at: https://reactrouter.com/en/main
+
+Mozilla Developer Network (2024) *Web Storage API - localStorage and sessionStorage.* Available at: https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API
+*/
