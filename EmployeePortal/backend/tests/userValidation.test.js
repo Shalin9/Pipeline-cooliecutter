@@ -54,3 +54,16 @@ describe("Input Whitelisting Validation", () => {
   });
 
 });
+
+
+/*
+References (Harvard Style):
+
+Facebook Inc. (2024) *Jest - JavaScript testing framework documentation.* Available at: https://jestjs.io/docs/getting-started
+
+Mozilla Developer Network (2024) *Regular expressions (RegExp) - JavaScript documentation.* Available at: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+
+ECMAScript (2024) *ECMAScript 2023 Language Specification.* Available at: https://tc39.es/ecma262/
+*/
+
+
