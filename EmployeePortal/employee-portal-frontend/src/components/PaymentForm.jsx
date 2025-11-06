@@ -41,3 +41,17 @@ const PaymentForm = ({ onPaymentCreated }) => {
 };
 
 export default PaymentForm;
+
+
+
+/*
+References (Harvard Style):
+
+Meta Platforms Inc. (2024) *React Documentation: Components and Hooks.* Available at: https://react.dev/
+
+Axios (2024) *Axios - Promise-based HTTP client for the browser and Node.js.* Available at: https://axios-http.com/docs/intro
+
+Mozilla Developer Network (2024) *Regular expressions (RegExp) - JavaScript documentation.* Available at: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+
+Tailwind Labs Inc. (2024) *Tailwind CSS Documentation.* Available at: https://tailwindcss.com/docs
+*/
