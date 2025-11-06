@@ -110,3 +110,25 @@ if (import.meta.url === `file://${process.argv[1]}` || !process.env.JEST_WORKER_
 }
 
 export default createApp;
+
+/*
+References (Harvard Style):
+
+Express.js (2024) *Express - Node.js web application framework.* Available at: https://expressjs.com/
+
+Helmet (2024) *Helmet.js - Secure Express apps by setting HTTP headers.* Available at: https://helmetjs.github.io/
+
+express-rate-limit (2024) *Rate limiting middleware for Express.* Available at: https://www.npmjs.com/package/express-rate-limit
+
+cors (2024) *CORS middleware for Express.* Available at: https://www.npmjs.com/package/cors
+
+cookie-parser (2024) *cookie-parser - Parse Cookie header and populate req.cookies.* Available at: https://www.npmjs.com/package/cookie-parser
+
+xss-clean (2024) *xss-clean - Node.js middleware for sanitizing user input.* Available at: https://www.npmjs.com/package/xss-clean
+
+Mongoose (2024) *Mongoose documentation: Connections and Models.* Available at: https://mongoosejs.com/docs/guide.html
+
+dotenv (2024) *dotenv - Environment variable management for Node.js.* Available at: https://www.npmjs.com/package/dotenv
+
+Node.js Foundation (2024) *Node.js v22.0.0 Documentation.* Available at: https://nodejs.org/en/docs/
+*/
