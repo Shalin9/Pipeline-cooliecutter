@@ -1,40 +1,65 @@
-// routes/paymentsRoutes.js
+// backend/routes/paymentsRoutes.js
 import express from "express";
-import Payment from "../models/Payment.js";
-import { verifyToken } from "../middlewares/auth.js";
+import Payment from "../models/Payment.js"; // make sure Payment model exists
+import auth from "../middleware/auth.js";
 
 const router = express.Router();
 
-// Get payments for logged-in user
-router.get("/", verifyToken, async (req, res) => {
+// Helper for validating input
+function validatePaymentInput(data) {
+  const errors = [];
+  const regexName = /^[A-Za-z\s]{2,50}$/;
+  const regexAccount = /^[0-9]{4,20}$/;
+  const regexBank = /^[A-Za-z\s]{2,50}$/;
+  const regexCountry = /^[A-Za-z\s]{2,50}$/;
+  const regexCurrency = /^(USD|EUR|GBP|ZAR)$/;
+
+  if (!data.recipientName || !regexName.test(data.recipientName)) errors.push("Invalid recipient name");
+  if (!data.amount || isNaN(data.amount) || data.amount <= 0) errors.push("Invalid amount");
+  if (!data.currency || !regexCurrency.test(data.currency)) errors.push("Invalid currency");
+
+  // Optional fields
+  if (data.recipientAccount && !regexAccount.test(data.recipientAccount)) errors.push("Invalid recipient account");
+  if (data.bank && !regexBank.test(data.bank)) errors.push("Invalid bank");
+  if (data.country && !regexCountry.test(data.country)) errors.push("Invalid country");
+
+  return errors;
+}
+
+// GET all payments for logged-in user
+router.get("/", auth, async (req, res) => {
   try {
     const payments = await Payment.find({ userId: req.userId }).sort({ createdAt: -1 });
     res.json(payments);
   } catch (err) {
-    console.error("GET /payments error:", err);
+    console.error("FETCH PAYMENTS ERROR:", err);
     res.status(500).json({ error: "Server error fetching payments" });
   }
 });
 
-// Create a new payment
-router.post("/", verifyToken, async (req, res) => {
-  const { amount, recipient, currency } = req.body;
+// POST new payment
+router.post("/", auth, async (req, res) => {
+  const { recipientName, recipientAccount, bank, country, amount, currency } = req.body;
 
-  if (!amount || !recipient || !currency)
-    return res.status(400).json({ error: "Missing fields: amount, recipient, currency" });
+  const errors = validatePaymentInput({ recipientName, recipientAccount, bank, country, amount, currency });
+  if (errors.length > 0) return res.status(400).json({ errors });
 
   try {
     const newPayment = new Payment({
       userId: req.userId,
+      recipientName,
+      recipientAccount,
+      bank,
+      country,
       amount,
-      recipient,
-      currency: currency.toUpperCase(),
+      currency,
+      status: "Pending",
+      createdAt: new Date(),
     });
-
     await newPayment.save();
-    res.status(201).json({ message: "Payment created", payment: newPayment });
+    res.status(201).json(newPayment);
   } catch (err) {
-    console.error("POST /payments error:", err);
+    console.error("CREATE PAYMENT ERROR:", err);
     res.status(500).json({ error: "Server error creating payment" });
   }
 });

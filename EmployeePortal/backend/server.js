@@ -13,9 +13,12 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+// Environment variables
 const PORT = process.env.PORT || 4430;
-const SSL_KEY_PATH = process.env.SSL_KEY_PATH || path.resolve("../../localhost+2-key.pem");
-const SSL_CERT_PATH = process.env.SSL_CERT_PATH || path.resolve("../../localhost+2.pem");
+const SSL_KEY_PATH =
+  process.env.SSL_KEY_PATH || path.resolve("../../localhost+2-key.pem");
+const SSL_CERT_PATH =
+  process.env.SSL_CERT_PATH || path.resolve("../../localhost+2.pem");
 const MONGO_URI =
   process.env.MONGO_URI ||
   "mongodb+srv://ShalinUser:Sept2002Shay@cluster0.2dqorr5.mongodb.net/Employee-Portal?retryWrites=true&w=majority";
@@ -23,53 +26,53 @@ const MONGO_URI =
 async function createApp() {
   const app = express();
 
-  // Security
-  app.use(helmet());
-  app.use(express.json({ limit: "10kb" }));
-  app.use(express.urlencoded({ extended: false, limit: "10kb" }));
-  app.use(xss());
+  // ----------------- Security Middlewares -----------------
+  app.use(helmet()); // Basic security headers
+  app.use(xss()); // XSS protection
   app.use(cookieParser());
+  app.use(express.json({ limit: "10kb" })); // Limit JSON body size
+  app.use(express.urlencoded({ extended: false, limit: "10kb" }));
 
-  // CORS
-  app.use(
-    cors({
-      origin: ["http://localhost:3000", "https://localhost:3000"],
-      credentials: true,
-    })
-  );
-
-  // Rate limiter
+  // Rate Limiter (prevent brute-force)
   app.use(
     rateLimit({
-      windowMs: 15 * 60 * 1000,
+      windowMs: 15 * 60 * 1000, // 15 min
       max: 300,
       standardHeaders: true,
       legacyHeaders: false,
     })
   );
 
-  // Health check
+  // CORS configuration
+  app.use(
+    cors({
+      origin: ["http://localhost:3000", "https://localhost:3000", "http://localhost:3001", "https://localhost:3001"],
+      credentials: true,
+    })
+  );
+
+  // ----------------- Health Check -----------------
   app.get("/healthz", (req, res) => res.json({ ok: true }));
 
-  // Mount routes
+  // ----------------- Mount Routes -----------------
   try {
     const userRoutes = await import("./routes/userRoutes.js");
     app.use("/api/auth", userRoutes.default || userRoutes);
-    console.log("Mounted /api/auth");
+    console.log("✅ Mounted /api/auth");
 
     const paymentsRoutes = await import("./routes/paymentsRoutes.js");
     app.use("/api/payments", paymentsRoutes.default || paymentsRoutes);
-    console.log("Mounted /api/payments");
+    console.log("✅ Mounted /api/payments");
   } catch (err) {
-    console.error("Error mounting routes:", err);
+    console.error("❌ Error mounting routes:", err);
   }
 
-  // 404
+  // ----------------- 404 Handler -----------------
   app.use((req, res) => res.status(404).json({ error: "Not Found" }));
 
-  // Error handler
+  // ----------------- Global Error Handler -----------------
   app.use((err, req, res, next) => {
-    console.error("Unhandled error:", err);
+    console.error("❌ Unhandled error:", err);
     res.status(500).json({ error: err.message || "Internal Server Error" });
   });
 
@@ -81,13 +84,14 @@ async function startServer() {
     await mongoose.connect(MONGO_URI);
     console.log("✅ Connected to MongoDB");
   } catch (err) {
-    console.error("MongoDB connection error:", err);
+    console.error("❌ MongoDB connection error:", err);
+    process.exit(1);
   }
 
   const app = await createApp();
 
   if (!fs.existsSync(SSL_KEY_PATH) || !fs.existsSync(SSL_CERT_PATH)) {
-    console.error("SSL key/cert not found");
+    console.error("❌ SSL key/cert not found");
     process.exit(1);
   }
 
@@ -97,7 +101,7 @@ async function startServer() {
   };
 
   https.createServer(options, app).listen(PORT, () => {
-    console.log(`🔒 HTTPS server listening at https://localhost:${PORT}`);
+    console.log(`🔒 HTTPS server running at https://localhost:${PORT}`);
   });
 }
 

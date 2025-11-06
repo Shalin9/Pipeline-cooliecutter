@@ -1,4 +1,3 @@
-// routes/userRoutes.js
 import express from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -8,9 +7,12 @@ const router = express.Router();
 
 // Login route
 router.post("/login", async (req, res) => {
+  console.log("Login request body:", req.body); // DEBUG
+
   const { username, password } = req.body;
 
-  if (!username || !password) return res.status(400).json({ error: "Username and password required" });
+  if (!username || !password)
+    return res.status(400).json({ error: "Username and password required" });
 
   try {
     const user = await User.findOne({ username });

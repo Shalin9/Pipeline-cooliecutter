@@ -2,11 +2,16 @@
 import mongoose from "mongoose";
 
 const paymentSchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  userId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "User" },
+  recipientName: { type: String, required: true },
+  recipientAccount: { type: String, required: true },
+  bank: { type: String, required: true },
+  country: { type: String, required: true },
   amount: { type: Number, required: true },
-  recipient: { type: String, required: true },
   currency: { type: String, required: true },
-  createdAt: { type: Date, default: Date.now },
+  status: { type: String, default: "Pending" },
+  date: { type: Date, default: Date.now },
 });
 
-export default mongoose.model("Payment", paymentSchema);
+const Payment = mongoose.model("Payment", paymentSchema);
+export default Payment;
