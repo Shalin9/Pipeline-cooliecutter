@@ -42,3 +42,15 @@ router.get("/", protect, async (req, res) => {
 });
 
 export default router;
+
+/*
+References (Harvard Style):
+
+Express.js (2024) *Express - Node.js web application framework.* Available at: https://expressjs.com/
+
+Mongoose (2024) *Mongoose documentation: Schemas and Models.* Available at: https://mongoosejs.com/docs/guide.html
+
+express-validator (2024) *express-validator Documentation.* Available at: https://express-validator.github.io/docs/
+
+Node.js Foundation (2024) *Node.js v22.0.0 Documentation.* Available at: https://nodejs.org/en/docs/
+*/
