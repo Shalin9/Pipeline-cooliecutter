@@ -43,3 +43,17 @@ export function jwtMiddleware(req, res, next) {
   req.user = payload;
   next();
 }
+
+/*
+References (Harvard Style):
+
+bcrypt (2024) *bcrypt Documentation - Password Hashing Library.* Available at: https://www.npmjs.com/package/bcrypt
+
+jsonwebtoken (2024) *jsonwebtoken - JSON Web Token implementation for Node.js.* Available at: https://www.npmjs.com/package/jsonwebtoken
+
+dotenv (2024) *dotenv - Environment variable management for Node.js.* Available at: https://www.npmjs.com/package/dotenv
+
+Node.js Foundation (2024) *Node.js v22.0.0 Documentation.* Available at: https://nodejs.org/en/docs/
+
+Mozilla Developer Network (2024) *Working with Environment Variables in Node.js.* Available at: https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/environment_variables
+*/
