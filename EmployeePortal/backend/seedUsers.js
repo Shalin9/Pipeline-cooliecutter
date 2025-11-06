@@ -41,3 +41,15 @@ const seedUsers = async () => {
 };
 
 seedUsers();
+
+/*
+References (Harvard Style):
+
+Mongoose (2024) *Mongoose documentation: Connections and Models.* Available at: https://mongoosejs.com/docs/guide.html
+
+bcryptjs (2024) *bcryptjs - Optimized bcrypt in JavaScript.* Available at: https://www.npmjs.com/package/bcryptjs
+
+dotenv (2024) *dotenv - Environment variable management for Node.js.* Available at: https://www.npmjs.com/package/dotenv
+
+Node.js Foundation (2024) *Node.js v22.0.0 Documentation.* Available at: https://nodejs.org/en/docs/
+*/
