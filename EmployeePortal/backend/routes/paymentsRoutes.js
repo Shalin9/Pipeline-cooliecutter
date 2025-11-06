@@ -65,3 +65,15 @@ router.post("/", auth, async (req, res) => {
 });
 
 export default router;
+
+/*
+References (Harvard Style):
+
+Express.js (2024) *Express - Node.js web application framework.* Available at: https://expressjs.com/
+
+Mongoose (2024) *Mongoose documentation: Schemas and Models.* Available at: https://mongoosejs.com/docs/guide.html
+
+Node.js Foundation (2024) *Node.js v22.0.0 Documentation.* Available at: https://nodejs.org/en/docs/
+
+Mozilla Developer Network (2024) *Regular expressions (RegExp) - JavaScript documentation.* Available at: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+*/
