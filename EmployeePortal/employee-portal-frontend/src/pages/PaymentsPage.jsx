@@ -243,3 +243,18 @@ export default function PaymentsPage() {
     </div>
   );
 }
+
+
+/*
+References (Harvard Style):
+
+Meta Platforms Inc. (2024) *React Documentation: Components, Hooks, and State Management.* Available at: https://react.dev/
+
+React Router (2024) *React Router Documentation.* Available at: https://reactrouter.com/en/main
+
+Axios (2024) *Axios - Promise-based HTTP client for the browser and Node.js.* Available at: https://axios-http.com/docs/intro
+
+Mozilla Developer Network (2024) *Web Storage API - localStorage and sessionStorage.* Available at: https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API
+
+CSS Tricks (2024) *CSS Gradients and Animations Guide.* Available at: https://css-tricks.com/
+*/
