@@ -5,10 +5,10 @@ export const accountRe = /^[A-Z0-9\-\_]{6,34}$/i; // simplified IBAN-like
 export const descriptionRe = /^[\w\s\-\.,]{0,140}$/; // short description allowed chars
 
 export function validatePayment(body) {
-  if (!currencyRe.test(body.currency)) return { ok:false, field:'currency' };
-  if (!amountRe.test(String(body.amount))) return { ok:false, field:'amount' };
-  if (!accountRe.test(body.toAccount)) return { ok:false, field:'toAccount' };
-  if (body.description && !descriptionRe.test(body.description)) return { ok:false, field:'description' };
+  if (!currencyRe.test(body.currency)) return { ok:false, field:"currency" };
+  if (!amountRe.test(String(body.amount))) return { ok:false, field:"amount" };
+  if (!accountRe.test(body.toAccount)) return { ok:false, field:"toAccount" };
+  if (body.description && !descriptionRe.test(body.description)) return { ok:false, field:"description" };
   return { ok:true };
 }
 

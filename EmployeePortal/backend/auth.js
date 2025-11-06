@@ -1,14 +1,14 @@
 // auth.js
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import fs from 'fs';
-import path from 'path';
-import dotenv from 'dotenv';
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import fs from "fs";
+import path from "path";
+import dotenv from "dotenv";
 dotenv.config();
 
-const SALT_ROUNDS = parseInt(process.env.SALT_ROUNDS || '12', 10);
-const JWT_SECRET = process.env.JWT_SECRET || 'change_me';
-const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '1h';
+const SALT_ROUNDS = parseInt(process.env.SALT_ROUNDS || "12", 10);
+const JWT_SECRET = process.env.JWT_SECRET || "change_me";
+const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || "1h";
 
 export async function hashPassword(plain) {
   const salt = await bcrypt.genSalt(SALT_ROUNDS);
@@ -34,12 +34,12 @@ export function verifyJWT(token) {
 // simple middleware to protect routes via Authorization header
 export function jwtMiddleware(req, res, next) {
   const authHeader = req.headers.authorization;
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return res.status(401).json({ error: 'Missing token' });
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return res.status(401).json({ error: "Missing token" });
   }
-  const token = authHeader.split(' ')[1];
+  const token = authHeader.split(" ")[1];
   const payload = verifyJWT(token);
-  if (!payload) return res.status(401).json({ error: 'Invalid token' });
+  if (!payload) return res.status(401).json({ error: "Invalid token" });
   req.user = payload;
   next();
 }

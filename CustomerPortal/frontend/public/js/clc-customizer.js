@@ -1,12 +1,12 @@
 ( function ( $ ) {
-	'use strict';
+	"use strict";
 
-	if ( 'undefined' !== typeof ( wp ) && 'undefined' !== typeof ( wp.customize ) ) {
+	if ( "undefined" !== typeof ( wp ) && "undefined" !== typeof ( wp.customize ) ) {
 
 		// Detect when the templates section is expanded (or closed) so we can hide the templates shortcut when it's open.
-		wp.customize.panel( 'clc_main_panel', function ( section ) {
+		wp.customize.panel( "clc_main_panel", function ( section ) {
 			section.expanded.bind( function ( isExpanding ) {
-				var loginURL = CLCUrls.siteurl + '?colorlib-login-customizer-customization=true';
+				var loginURL = CLCUrls.siteurl + "?colorlib-login-customizer-customization=true";
 
 				// Value of isExpanding will = true if you're entering the section, false if you're leaving it.
 				if ( isExpanding ) {
@@ -17,21 +17,21 @@
 			} );
 		} );
 
-		wp.customize.section( 'clc_logo', function ( section ) {
+		wp.customize.section( "clc_logo", function ( section ) {
 			section.expanded.bind( function ( isExpanding ) {
 				// Value of isExpanding will = true if you're entering the section, false if you're leaving it.
 				if ( isExpanding ) {
-					var logoTextColor      = wp.customize.control( 'clc-options[logo-text-color]' ),
-					    logoTextColorHover = wp.customize.control( 'clc-options[logo-text-color-hover]' ),
-					    logoTextSize       = wp.customize.control( 'clc-options[logo-text-size]' ),
-					    logoImage          = wp.customize.control( 'clc-options[custom-logo]' ),
-					    logoWidth          = wp.customize.control( 'clc-options[logo-width]' ),
-					    logoHeight         = wp.customize.control( 'clc-options[logo-height]' ),
-					    logoTitle          = wp.customize.control( 'clc-options[logo-title]' ),
-					    logoURL            = wp.customize.control( 'clc-options[logo-url]' ),
-					    logo_type          = wp.customize.control( 'clc-options[logo-settings]' );
+					var logoTextColor      = wp.customize.control( "clc-options[logo-text-color]" ),
+					    logoTextColorHover = wp.customize.control( "clc-options[logo-text-color-hover]" ),
+					    logoTextSize       = wp.customize.control( "clc-options[logo-text-size]" ),
+					    logoImage          = wp.customize.control( "clc-options[custom-logo]" ),
+					    logoWidth          = wp.customize.control( "clc-options[logo-width]" ),
+					    logoHeight         = wp.customize.control( "clc-options[logo-height]" ),
+					    logoTitle          = wp.customize.control( "clc-options[logo-title]" ),
+					    logoURL            = wp.customize.control( "clc-options[logo-url]" ),
+					    logo_type          = wp.customize.control( "clc-options[logo-settings]" );
 
-					if ( 'hide-logo' === logo_type.settings.default._value ) {
+					if ( "hide-logo" === logo_type.settings.default._value ) {
 						logoTextColor.toggle( false );
 						logoTextColorHover.toggle( false );
 						logoTextSize.toggle( false );
@@ -47,7 +47,7 @@
 						logoTitle.toggle( true );
 					}
 
-					if ( 'show-text-only' === logo_type.settings.default._value ) {
+					if ( "show-text-only" === logo_type.settings.default._value ) {
 						logoTextColor.toggle( true );
 						logoTextColorHover.toggle( true );
 						logoTextSize.toggle( true );
@@ -56,7 +56,7 @@
 						logoImage.toggle( false );
 						logoWidth.toggle( false );
 						logoHeight.toggle( false );
-					} else if ( 'show-image-ony' === logo_type.settings.default._value ) {
+					} else if ( "show-image-ony" === logo_type.settings.default._value ) {
 						logoTextColor.toggle( false );
 						logoTextColorHover.toggle( false );
 						logoTextSize.toggle( false );
@@ -80,38 +80,38 @@
 			} );
 		} );
 
-		wp.customize.section( 'clc_register-form', function ( section ) {
+		wp.customize.section( "clc_register-form", function ( section ) {
 			section.expanded.bind( function ( isExpanding ) {
 				// Value of isExpanding will = true if you're entering the section, false if you're leaving it.
 				if ( isExpanding ) {
-					wp.customize.previewer.send( 'change-form', 'register' );
+					wp.customize.previewer.send( "change-form", "register" );
 				} else {
-					wp.customize.previewer.send( 'change-form', 'login' );
+					wp.customize.previewer.send( "change-form", "login" );
 				}
 			} );
 		} );
 
-		wp.customize.section( 'clc_lostpassword-form', function ( section ) {
+		wp.customize.section( "clc_lostpassword-form", function ( section ) {
 			section.expanded.bind( function ( isExpanding ) {
 				// Value of isExpanding will = true if you're entering the section, false if you're leaving it.
 				if ( isExpanding ) {
-					wp.customize.previewer.send( 'change-form', 'lostpassword' );
+					wp.customize.previewer.send( "change-form", "lostpassword" );
 				} else {
-					wp.customize.previewer.send( 'change-form', 'login' );
+					wp.customize.previewer.send( "change-form", "login" );
 				}
 			} );
 		} );
 
-		wp.customize.controlConstructor['clc-templates'] = wp.customize.Control.extend( {
+		wp.customize.controlConstructor["clc-templates"] = wp.customize.Control.extend( {
 			ready:        function () {
 				var control = this;
 
-				this.container.on( 'change', 'input:radio', function () {
+				this.container.on( "change", "input:radio", function () {
 					var template = $( this ).val();
 
-					control.loadTemplate( 'default' );
+					control.loadTemplate( "default" );
 
-					if ( 'default' !== template ) {
+					if ( "default" !== template ) {
 						control.loadTemplate( template );
 					}
 
@@ -124,7 +124,7 @@
 				$.each( options, function ( index, option ) {
 					var currentControl = wp.customize.control( option.name );
 
-					if ( 'default' === optionName ) {
+					if ( "default" === optionName ) {
 						currentControl.setting( option.value );
 					} else {
 						currentControl.setting( option.value );
@@ -134,16 +134,16 @@
 			}
 		} );
 
-		wp.customize.controlConstructor['clc-range-slider'] = wp.customize.Control.extend( {
+		wp.customize.controlConstructor["clc-range-slider"] = wp.customize.Control.extend( {
 			ready: function () {
 				var control           = this,
-				    controlField      = control.container.find( 'input.clc-slider' ),
-				    controlSlider     = control.container.find( 'div.clc-slider' ),
+				    controlField      = control.container.find( "input.clc-slider" ),
+				    controlSlider     = control.container.find( "div.clc-slider" ),
 				    controlSliderData = control.params.choices,
 				    updating          = false;
 
 				controlSlider.slider( {
-					range: 'min',
+					range: "min",
 					min:   controlSliderData.min,
 					max:   controlSliderData.max,
 					step:  controlSliderData.step,
@@ -168,21 +168,21 @@
 					}
 
 					controlField.val( value );
-					controlSlider.slider( 'value', value );
+					controlSlider.slider( "value", value );
 
 				} );
 
 			}
 		} );
 
-		wp.customize.controlConstructor['clc-button-group'] = wp.customize.Control.extend( {
+		wp.customize.controlConstructor["clc-button-group"] = wp.customize.Control.extend( {
 			ready: function () {
 				var control  = this,
 				    updating = false;
-				control.container.on( 'click', '.colorlib-login-customizer-control-group > a', function () {
-					var value = $( this ).attr( 'data-value' );
-					$( this ).siblings().removeClass( 'active' );
-					$( this ).addClass( 'active' );
+				control.container.on( "click", ".colorlib-login-customizer-control-group > a", function () {
+					var value = $( this ).attr( "data-value" );
+					$( this ).siblings().removeClass( "active" );
+					$( this ).addClass( "active" );
 
 					updating = true;
 					control.setting.set( value );
@@ -192,30 +192,30 @@
 				// Whenever the setting's value changes, refresh the preview.
 				control.setting.bind( function ( value ) {
 
-					var options = control.container.find( '.colorlib-login-customizer-control-group > a' );
+					var options = control.container.find( ".colorlib-login-customizer-control-group > a" );
 
 					// Bail if the update came from the control itself.
 					if ( updating ) {
 						return;
 					}
 
-					options.removeClass( 'active' );
-					options.filter( '[data-value=' + value + ']' ).addClass( 'active' );
+					options.removeClass( "active" );
+					options.filter( "[data-value=" + value + "]" ).addClass( "active" );
 
 				} );
 
 			}
 		} );
 
-		wp.customize.controlConstructor['clc-column-width'] = wp.customize.Control.extend( {
+		wp.customize.controlConstructor["clc-column-width"] = wp.customize.Control.extend( {
 			ready: function () {
 				var control  = this,
 				    updating = false;
 
 				control.values = control.params.value;
 
-				control.container.on( 'click', '.clc-layouts-setup .clc-column > a', function () {
-					var currentAction = $( this ).data( 'action' );
+				control.container.on( "click", ".clc-layouts-setup .clc-column > a", function () {
+					var currentAction = $( this ).data( "action" );
 
 					updating = true;
 					control.updateColumns( currentAction );
@@ -247,24 +247,24 @@
 					return;
 				}
 
-				if ( 'left' == increment ) {
-					incrementElement = control.container.find( '.clc-column-left' );
-					decrementElement = control.container.find( '.clc-column-right' );
+				if ( "left" == increment ) {
+					incrementElement = control.container.find( ".clc-column-left" );
+					decrementElement = control.container.find( ".clc-column-right" );
 
-					control.values['left'] += 1;
-					control.values['right'] -= 1;
+					control.values["left"] += 1;
+					control.values["right"] -= 1;
 
 				} else {
-					incrementElement = control.container.find( '.clc-column-right' );
-					decrementElement = control.container.find( '.clc-column-left' );
+					incrementElement = control.container.find( ".clc-column-right" );
+					decrementElement = control.container.find( ".clc-column-left" );
 
-					control.values['right'] += 1;
-					control.values['left'] -= 1;
+					control.values["right"] += 1;
+					control.values["left"] -= 1;
 
 				}
 
 				// Update control values
-				control.setting( '' );
+				control.setting( "" );
 				control.setting( control.values );
 
 				control.rederColumns();
@@ -273,42 +273,42 @@
 
 			rederColumns: function () {
 				var control     = this,
-				    leftColumn  = control.container.find( '.clc-column-left' ),
-				    rightColumn = control.container.find( '.clc-column-right' ),
-				    classes     = 'col12 col11 col10 col9 col8 col7 col6 col5 col4 col3 col2 col1';
+				    leftColumn  = control.container.find( ".clc-column-left" ),
+				    rightColumn = control.container.find( ".clc-column-right" ),
+				    classes     = "col12 col11 col10 col9 col8 col7 col6 col5 col4 col3 col2 col1";
 
-				leftColumn.removeClass( classes ).addClass( 'col' + control.values['left'] );
-				rightColumn.removeClass( classes ).addClass( 'col' + control.values['right'] );
+				leftColumn.removeClass( classes ).addClass( "col" + control.values["left"] );
+				rightColumn.removeClass( classes ).addClass( "col" + control.values["right"] );
 
 			}
 
 
 		} );
 
-		wp.customize.controlConstructor['clc-color-picker'] = wp.customize.Control.extend( {
+		wp.customize.controlConstructor["clc-color-picker"] = wp.customize.Control.extend( {
 			ready: function () {
 				var control  = this,
 				    updating = false,
-				    clear    = control.container.find( 'a.clc-color-picker-default' ),
-				    input    = $( control.container ).find( '.clc-color-picker' );
+				    clear    = control.container.find( "a.clc-color-picker-default" ),
+				    input    = $( control.container ).find( ".clc-color-picker" );
 
 				input.minicolors( {
-					format:   'hex',
+					format:   "hex",
 					opacity:  true,
-					keywords: 'transparent, initial, inherit',
+					keywords: "transparent, initial, inherit",
 					change:   function ( value, opacity ) {
 						updating = true;
-						control.setting.set( input.minicolors( 'rgbaString' ) );
+						control.setting.set( input.minicolors( "rgbaString" ) );
 						updating = false;
 					}
 				} );
 
 				if ( clear.length > 0 ) {
-					clear.on( 'click', function ( e ) {
-						var defaultValue = $( this ).attr( 'data-default' );
+					clear.on( "click", function ( e ) {
+						var defaultValue = $( this ).attr( "data-default" );
 						e.preventDefault();
 
-						input.minicolors( 'value', defaultValue );
+						input.minicolors( "value", defaultValue );
 						updating = true;
 						control.setting.set( defaultValue );
 						updating = false;
@@ -322,16 +322,16 @@
 					if ( updating ) {
 						return;
 					}
-					input.minicolors( 'value', value );
+					input.minicolors( "value", value );
 
 				} );
 			}
 		} );
 
 		// Listen for previewer events
-		wp.customize.bind( 'ready', function () {
+		wp.customize.bind( "ready", function () {
 
-			wp.customize.previewer.bind( 'clc-focus-section', function ( sectionName ) {
+			wp.customize.previewer.bind( "clc-focus-section", function ( sectionName ) {
 				var section = wp.customize.section( sectionName );
 
 				if ( undefined !== section ) {
@@ -339,15 +339,15 @@
 				}
 			} );
 
-			wp.customize( 'clc-options[columns]', function ( value ) {
+			wp.customize( "clc-options[columns]", function ( value ) {
 
 				value.bind( function ( to ) {
-					var alignControl           = wp.customize.control( 'clc-options[form-column-align]' ),
-					    backgroundControl      = wp.customize.control( 'clc-options[custom-background-form]' ),
-					    columnsWidthControl    = wp.customize.control( 'clc-options[columns-width]' ),
-					    backgroundColorControl = wp.customize.control( 'clc-options[custom-background-color-form]' );
+					var alignControl           = wp.customize.control( "clc-options[form-column-align]" ),
+					    backgroundControl      = wp.customize.control( "clc-options[custom-background-form]" ),
+					    columnsWidthControl    = wp.customize.control( "clc-options[columns-width]" ),
+					    backgroundColorControl = wp.customize.control( "clc-options[custom-background-color-form]" );
 
-					if ( '2' === to ) {
+					if ( "2" === to ) {
 						alignControl.toggle( true );
 						backgroundControl.toggle( true );
 						backgroundColorControl.toggle( true );
@@ -362,13 +362,13 @@
 			} );
 
 			// validation for the login-level setting
-			wp.customize( 'clc-options[login-label]', function ( setting ) {
+			wp.customize( "clc-options[login-label]", function ( setting ) {
 				setting.validate = function ( value ) {
 					var code, notification;
 
-					code = 'required';
+					code = "required";
 					if ( !value ) {
-						notification = new wp.customize.Notification( code, { message: 'value is empty' } );
+						notification = new wp.customize.Notification( code, { message: "value is empty" } );
 						setting.notifications.add( code, notification );
 					} else {
 						setting.notifications.remove( code );
@@ -378,20 +378,20 @@
 				};
 			} );
 
-			wp.customize( 'clc-options[logo-settings]', function ( setting ) {
+			wp.customize( "clc-options[logo-settings]", function ( setting ) {
 
 				setting.bind( function ( value ) {
 
-					var logoTextColor      = wp.customize.control( 'clc-options[logo-text-color]' ),
-					    logoTextColorHover = wp.customize.control( 'clc-options[logo-text-color-hover]' ),
-					    logoTextSize       = wp.customize.control( 'clc-options[logo-text-size]' ),
-					    logoImage          = wp.customize.control( 'clc-options[custom-logo]' ),
-					    logoWidth          = wp.customize.control( 'clc-options[logo-width]' ),
-					    logoHeight         = wp.customize.control( 'clc-options[logo-height]' ),
-					    logoTitle         = wp.customize.control( 'clc-options[logo-title]' ),
-					    logoURL         = wp.customize.control( 'clc-options[logo-url]' );
+					var logoTextColor      = wp.customize.control( "clc-options[logo-text-color]" ),
+					    logoTextColorHover = wp.customize.control( "clc-options[logo-text-color-hover]" ),
+					    logoTextSize       = wp.customize.control( "clc-options[logo-text-size]" ),
+					    logoImage          = wp.customize.control( "clc-options[custom-logo]" ),
+					    logoWidth          = wp.customize.control( "clc-options[logo-width]" ),
+					    logoHeight         = wp.customize.control( "clc-options[logo-height]" ),
+					    logoTitle         = wp.customize.control( "clc-options[logo-title]" ),
+					    logoURL         = wp.customize.control( "clc-options[logo-url]" );
 
-					if ( 'hide-logo' === value ) {
+					if ( "hide-logo" === value ) {
 						logoTextColor.toggle( false );
 						logoTextColorHover.toggle( false );
 						logoTextSize.toggle( false );
@@ -407,7 +407,7 @@
 						logoTitle.toggle( true );
 					}
 
-					if ( 'show-text-only' === value ) {
+					if ( "show-text-only" === value ) {
 						logoTextColor.toggle( true );
 						logoTextColorHover.toggle( true );
 						logoTextSize.toggle( true );
@@ -416,7 +416,7 @@
 						logoImage.toggle( false );
 						logoWidth.toggle( false );
 						logoHeight.toggle( false );
-					} else if ( 'show-image-ony' === value ) {
+					} else if ( "show-image-ony" === value ) {
 						logoTextColor.toggle( false );
 						logoTextColorHover.toggle( false );
 						logoTextSize.toggle( false );
