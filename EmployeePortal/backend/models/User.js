@@ -11,3 +11,13 @@ const userSchema = new mongoose.Schema(
 );
 
 export default mongoose.model("User", userSchema);
+
+/*
+References (Harvard Style):
+
+Mongoose (2024) *Mongoose documentation: Schemas and Models.* Available at: https://mongoosejs.com/docs/guide.html
+
+Node.js Foundation (2024) *Node.js v22.0.0 Documentation.* Available at: https://nodejs.org/en/docs/
+
+MongoDB Inc. (2024) *MongoDB Developer Documentation.* Available at: https://www.mongodb.com/docs/
+*/
