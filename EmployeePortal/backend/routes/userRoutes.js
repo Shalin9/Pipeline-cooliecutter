@@ -36,3 +36,18 @@ router.post("/login", async (req, res) => {
 });
 
 export default router;
+
+
+/*
+References (Harvard Style):
+
+Express.js (2024) *Express - Node.js web application framework.* Available at: https://expressjs.com/
+
+bcrypt (2024) *bcrypt Documentation - Password Hashing Library.* Available at: https://www.npmjs.com/package/bcrypt
+
+jsonwebtoken (2024) *jsonwebtoken - JSON Web Token implementation for Node.js.* Available at: https://www.npmjs.com/package/jsonwebtoken
+
+Node.js Foundation (2024) *Node.js v22.0.0 Documentation.* Available at: https://nodejs.org/en/docs/
+
+Mongoose (2024) *Mongoose documentation: Schemas and Models.* Available at: https://mongoosejs.com/docs/guide.html
+*/
