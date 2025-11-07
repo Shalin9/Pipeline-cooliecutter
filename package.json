@@ -5,9 +5,10 @@
   "description": "Customer Portal project with frontend, backend, and ESLint setup for CI/CD pipeline",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js",
-    "lint": "eslint . --fix"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "echo \"No tests yet\" && exit 0",
+    "lint": "eslint ./CustomerPortal/frontend/src ./EmployeePortal/employee-portal-frontend/src ./EmployeePortal/backend --fix"
   },
   "dependencies": {
     "axios": "^1.13.2",
